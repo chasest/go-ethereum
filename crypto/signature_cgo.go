@@ -27,6 +27,11 @@ import (
 	"github.com/ethereum/go-ethereum/crypto/secp256k1"
 )
 
+// CompressExtendedPubkey encodes an extended public key to the 33-byte compressed format.
+func CompressExtendedPubkey(pubkey *ecdsa.PublicKey) []byte {
+	return secp256k1.CompressPubkey(pubkey.X, pubkey.Y)
+}
+
 // Ecrecover returns the uncompressed public key that created the given signature.
 func Ecrecover(hash, sig []byte) ([]byte, error) {
 	return secp256k1.RecoverPubkey(hash, sig)
